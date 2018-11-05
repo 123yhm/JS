@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第四次轮播图完结篇</title>
+    <style type="text/css">
+        *{margin:0px;padding:0px;}
+        body{font-size: 12px;font-family: 微软雅黑;}
+        ul,li{list-style: none;}
+        a{text-decoration: none;}
+        .bigBox{width:350px;height: 350px;margin: 200px auto;border: 1px solid red;overflow: hidden;
+            position:relative; }
+        .imgs{width:1050px; height: 350px;border: 1px solid red;position:absolute;}
+        .imgs div{float: left;}
+        .leftBtn span{
+            text-align: center;
+            width: 50px;
+            height: 80px;
+            float: left;
+            position: relative;
+            margin-top: 100px;
+            opacity:0.2;
+            line-height: 80px;
+            font-size: 30px;
+            cursor: pointer;
+            background: lawngreen;
+        }
+        .rightBtn span{
+            width: 50px;
+            height: 80px;
+            float: right;
+            position: relative;
+            margin-top: 100px;
+            opacity:0.2;
+            line-height: 80px;
+            font-size: 30px;
+            cursor: pointer;
+            text-align: center;
+            background: lawngreen;
+        }
+
+        .leftBtn span:hover{
+            opacity:1;
+            background: red;
+        }
+
+        .rightBtn span:hover{
+            opacity:1;
+            background: red;
+        }
+        #origin {
+            width: 100px;
+            margin-top: 320px;
+            height: 20px;
+            position: absolute;
+            margin-left: 146px;
+        }
+        #origin li{
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            margin: 5px;
+            float: left;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+
+<DIV class="bigBox">
+
+    <DIV class="imgs" id="imgs">
+        <DIV><img src="img/s1.jpg" width="350" height="350"/></DIV>
+        <DIV><img src="img/s2.jpg" width="350" height="350"/></DIV>
+        <DIV><img src="img/s3.jpg" width="350" height="350"/></DIV>
+    </DIV>
+
+    <DIV class="leftBtn" id="leftBtn" ><span id="left" ><</span>
+    </DIV>
+
+    <DIV class="rightBtn" id="rightBtn"><span id="right" >></span>
+    </DIV>
+    <ul id="origin">
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</DIV>
+    <script>
+
+            var left=document.getElementById("left");
+            var right=document.getElementById("rightBtn");
+            var img =document.getElementById("imgs");
+            var lis= document.getElementsByTagName("li");
+            var initvalue=0;//初始值
+            var tagervalue=0;//目标值
+
+ //在没有任何干挠时会处于一直运动状态
+            function mover(){
+                initvalue=initvalue+(tagervalue-initvalue)/10;
+                img.style.marginLeft=initvalue+"px";
+            }
+            setInterval("mover()",10);
+
+//左
+            left.onclick=function (ev) {
+                if (tagervalue<=-700){
+                    return;
+                }
+                tagervalue+=-350;
+                img.style.marginLeft=initvalue+"px";
+                color(tagervalue/-350);
+            };
+ //右
+            right.onclick = function (ev) {
+                if (tagervalue>=0){
+                    return;
+                }
+                tagervalue+=350;
+                img.style.marginLeft = initvalue + "px";
+                color(tagervalue/-350);
+            };
+//底部
+            var mag=lis[0];//标记
+            mag.style.background="red";//默认第一个开始的下标及颜色
+            for (var i=0;i<lis.length;i++) {
+                lis[i].mag = i;
+                lis[i].onmouseover = function () {//移入
+                    tagervalue= this.mag * (-350);
+                    color(this.mag);
+                    clearInterval(interval)//移入时停止旋转
+                };
+                lis[i].onmouseout=function(){//移出
+                    startmove();
+                }
+            }
+//旋转开始
+            var interval;
+            function startmove(){
+                 interval = setInterval("arginmove()",3000);
+            }
+//重新开始移动
+            function arginmove(){
+                if(tagervalue<=-700){
+                    tagervalue=0;
+                }else{
+                    tagervalue-=350;
+                }
+                var index=tagervalue/-350;
+                color(index);
+            }
+            setInterval("arginmove()",3000);
+//颜色
+            function color(index){
+                if(mag!=null){
+                    mag.style.background = "white";
+                }
+                lis[index].style.background = "red";
+               mag= lis[index]
+            }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>时间开始停止</title>
+
+</head>
+<body onload="testDate()">
+    <input type="text" name="time" id="time" value="0000"  width="100px"/>
+    <input type="button" value="停止" onclick="testTop()"/>
+    <script type="text/javascript">
+        var timeout ;
+        function testDate(){
+           var date=new Date();
+            var hours=date.getHours();
+            var minutes=date.getMinutes();
+            var seconds=date.getSeconds();
+            time.value=hours+"点"+minutes+"分"+seconds+"秒";
+
+             timeout = setTimeout("testDate()",1000);
+        }
+        function testTop() {//停止
+
+            clearTimeout(timeout);
+        }
+
+
+
+    </script>
+</body>
+</html>

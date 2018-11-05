@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>滑动图片</title>
+</head>
+<body>
+<div id="box" style="border: 1px solid red; margin-left:10px;
+background: lawngreen;width: 300px;height: 300px;position: absolute;">
+</div>
+
+<div id="box2" style="border: 1px solid red;margin-top: 400px;
+background: lawngreen;width: 300px;height: 300px;position: absolute;">
+</div>
+<script>
+    var box1 = document.getElementById("box");
+    var index = 0;
+
+    function test() {
+        index += 100;
+        box1.style.marginLeft = index + "px";
+
+    }
+    setInterval("test()", 1000);
+    function test2(){
+        if (index>1000){
+            index=0;
+        }
+    }
+    setInterval("test2()",1000);
+    //第二个div
+    var box2 = document.getElementById("box2");
+    var index2 = 100;
+    var startvalue = 0;
+
+    function indexnumber() {
+        startvalue = startvalue + (index2 - startvalue) / 10;
+        box2.style.marginLeft = startvalue + "px";
+    }
+
+    setInterval("indexnumber()", 10);
+
+    function clean() {
+        startvalue+=200;
+
+            if(startvalue>500){
+                startvalue = 0;
+            }
+
+    };
+    setInterval("clean()", 1000);
+</script>
+</body>
+</html>

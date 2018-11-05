@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>练习</title>
+    <style type="text/css">
+
+        #box{
+            width: 100px;
+            height: 100px;
+            background: lawngreen;
+            position: absolute;
+            pointer-events: none;
+
+        }
+    </style>
+<!--    <style type="text/css">
+        *{margin: 0;padding: 0;}
+        a{text-decoration: none;color: #333;}
+        ul,li{list-style: none;}
+        body{font-size: 14px;font-family: "微软雅黑";-webkit-user-select:none;-moz-user-select:none;user-select:none;height: 1000px;}
+        #box{width: 700px;height: 500px;background: #FCF3B4;margin: 30px auto;padding: 20px;font-size: 16px;color: #333;position: relative;overflow: hidden;}
+        .pbold{font-size: 20px;font-weight: bold;font-family: "Vivaldi"}
+        #scrollBar{width: 20px;height: 100%;border-radius:10px;background: linear-gradient(#84E7F4,#F164F4);position: absolute;top: 0;right: 0;display: one;}
+        #bar{width: 20px;height: 50px;background: #333;border-radius:10px;position: absolute;top: 0;right;z-index: 2}
+        #b_over{width: 100%;height: 100%;background: transparent;position: absolute;top: 0;right;z-index: 1}
+        #content{position: relative;}
+    </style>-->
+</head>
+<body>
+<!--<div id="box">
+    <div id="scrollBar">
+        <div id="bar"></div>
+        <div id="b_over"></div>
+    </div>
+
+    <div id="content">
+        <h2>阿甘正传</h2>
+        <br/>
+        <p class="pbold">1、Life was like a box of chocolates, you never know what you're going to get.</p>
+        　　<p>生命就像一盒巧克力，结果往往出人意料。</p>
+        　　<p class="pbold">2、Stupid is as stupid does.</p>
+        　　<p>蠢人做蠢事，也可理解为傻人有傻福。</p>
+        　　<p class="pbold">3、Miracles happen every day.</p>
+        　　<p>奇迹每天都在发生。</p>
+        　　<p class="pbold">4、it made me look like a duck in water.</p>
+        　　<p>它让我如鱼得水。</p>
+        　　<p class="pbold">5、I don't know if we each have a destiny, or if we're all just floating around accidental—like on a breeze.</p>
+        　　<p>我不懂我们是否有着各自的命运，还是只是到处随风飘荡。</p>
+        　　<p class="pbold">6、Death is just a part of life, something we're all destined to do.</p>
+        　　<p>死亡是生命的一部分，是我们注定要做的一件事。</p>
+        　　<p class="pbold">7、You have got to put the past behind you before you can move on.</p>
+        　　<p>放下包袱，继续前进。</p>
+        　　<p class="pbold">8、It was like just before the sun goes to bed down on the bayou. There was a million sparkles on the river.</p>
+        　　<p>就像太阳在落山前映射在河口上，有无数的亮点在闪闪发光。</p>
+        　　<p class="pbold">9、If there is anything you need, I will not be far away.</p>
+        　　<p>只要你需要，我就在这里。</p>
+        　　<p class="pbold">10、I am a man of my word.</p>
+        　　<p>我是信守承诺的人。</p>
+        　　<p class="pbold">11、There is one small step for a man,a giant leap for mankind.</p>
+        　　<p>某人的一小步就是人类的一大步。</p>
+    </div>
+</div>-->
+
+<!--<div id="test" style="width:100px; height:100px; padding:10px; margin:10px; border:1px solid black;">
+
+</div>
+<script>
+    //122=1+10+100+10+1
+    console.log(test.offsetWidth);
+    console.log(test.offsetHeight);
+</script>-->
+<!--
+<div id="test" style="width:100px; height:100px; padding:10px; margin:10px; border:1px solid black; overflow: scroll;"></div>
+<script>
+    //IE8-浏览器将垂直滚动条的宽度计算在width宽度和height高度中，width和height的值仍然是100px；
+    //而其他浏览器则把垂直滚动条的宽度从width宽度中移出，把水平滚动条的高度从height高度中移出，则滚动条宽度为17px，width宽度和height高度为剩下的83px
+
+    if(window.getComputedStyle){
+        console.log(getComputedStyle(test).width,getComputedStyle(test).height)//83px
+    }else{
+        console.log(test.currentStyle.width,test.currentStyle.height);//100px
+    }
+    //122=1+10+100+10+1
+    console.log(test.offsetWidth,test.offsetHeight);
+</script>
+-->
+<div id="box">
+
+</div>
+<script>
+    var box=document.getElementById("box");
+    document.onmousemove=function (event) {
+        box.style.left=(event.offsetX-50)+"px";
+        box.style.top=(event.offsetY-50)+"px";
+    }
+</script>
+</body>
+</html>

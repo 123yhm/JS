@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS_Day03_1823</title>
+
+    <style type="text/css">
+        .bigBox {
+            margin: 150px auto;
+            width: 350px;
+            height: 350px;
+            border: darkgray 1px solid;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .imgs {
+            width: 1050px;
+            height: 350px;
+            position: absolute;
+        }
+
+        .imgs div {
+            float: left;
+        }
+
+        .leftBtn {
+            height: 350px;
+            width: 50px;
+            background: rgba(204, 104, 0, 0.5);
+            position: absolute;
+        }
+
+        .rightBtn {
+            height: 350px;
+            width: 50px;
+            background: rgba(177, 69, 147, 0.5);
+            position: absolute;
+            margin-left: 300px;
+        }
+
+        #pos {
+            padding: 0px;
+            position: absolute;
+            margin-top: 320px;
+            margin-left: 139px;
+        }
+
+        #pos li {
+            width: 10px;
+            height: 10px;
+            background: white;
+            list-style: none;
+            margin: 5px;
+            border-radius: 10px;
+            border: black 2px solid;
+            float: left;
+        }
+
+    </style>
+
+</head>
+<body>
+
+
+<DIV class="bigBox">
+
+    <DIV class="imgs" id="imgs">
+        <DIV><img src="img/s1.jpg" width="350" height="350"/></DIV>
+        <DIV><img src="img/s2.jpg" width="350" height="350"/></DIV>
+        <DIV><img src="img/s3.jpg" width="350" height="350"/></DIV>
+    </DIV>
+
+    <DIV class="leftBtn" id="leftBtn">
+    </DIV>
+
+    <DIV class="rightBtn" id="rightBtn">
+    </DIV>
+
+    <ul id="pos">
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+</DIV>
+
+
+<script>
+
+    var initLeft = 0;  // 初始图片的margin
+    var targer = 0;  // 图片要移动到的目标位置
+
+    var rightBtn = document.getElementById("leftBtn");
+    var leftBtn = document.getElementById("rightBtn");
+    var imgs = document.getElementById("imgs");
+
+
+    // 向左移动的这个方法 ，一直在后台执行
+    function moveLeft() {
+        initLeft = initLeft + (targer - initLeft) / 10;
+        imgs.style.marginLeft = initLeft + "px";
+    }
+
+    setInterval("moveLeft()", 10);
+
+
+    leftBtn.onclick = function (ev) {
+        if (targer <= -700) {
+            return;
+        }
+        targer += -350;
+        imgs.style.marginLeft = initLeft + "px";
+        markPos(targer / -350);
+    };
+
+    rightBtn.onclick = function (ev) {
+        if (targer >= 0) {
+            return;
+        }
+        targer += 350;
+        imgs.style.marginLeft = initLeft + "px";
+        markPos(targer / -350);
+    };
+
+    var lis = document.getElementsByTagName("li");
+    var mark = lis[0];
+    mark.style.background = "red";
+
+    for (var i = 0; i < lis.length; i++) {
+        alert("00000");
+        lis[i].mark = i;
+        lis[i].onmouseover = function () {
+
+            targer = this.mark * (-350);
+            markPos(this.mark);
+            // 取消循环
+            clearInterval(interval);
+        };
+        lis[i].onmouseout = function () {
+            startAuto();
+        };
+    }
+
+    // 自动移动
+    function autoMove() {
+        if (targer <= -700) {
+            targer = 0;
+        } else {
+            targer -= 350;
+        }
+        var index = targer / -350;
+        markPos(index);
+    }
+
+    var interval;
+
+    function startAuto() {
+        interval = setInterval("autoMove()", 3000);
+    }
+
+
+    function markPos(index) {
+        if (mark != null) {
+            mark.style.background = "white";
+        }
+        lis[index].style.background = "red";
+        mark = lis[index];
+    }
+    setTimeout("startAuto()", 3000);
+
+
+</script>
+
+
+</body>
+</html>

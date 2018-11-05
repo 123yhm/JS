@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        #maxbox{
+            width: 400px;
+            height: 300px;
+            border: 1px solid red;
+            margin: 200px 0px 0px 100px;
+            float: left;
+            position: relative;
+        }
+     #shadow{
+         width: 100px;
+         height: 100px;
+         background: yellow;
+         display: none;
+         pointer-events: none;
+         opacity: 0.5;
+         position: absolute;
+     }
+        .big {
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            display: none;
+            margin: 200px 0px 0px 503px;
+            float: left;
+        }
+        #bigBox img {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="maxbox">
+    <img id="img" src="img/a.png" style="width: 400px;height: 300px;"/>
+
+    <div id="shadow">
+
+    </div>
+</div>
+    <div id="bigBox" class="big">
+        <img src="img/a.png" id="bigImg" width="800px" alt=""/>
+    </div>
+<script>
+        var shadow=document.getElementById("shadow");
+        var maxbox=document.getElementById("maxbox");
+        var bigbox=document.getElementById("bigBox");
+        var bigimg=document.getElementById("bigImg");
+        maxbox.onmouseover=function (ev) {
+            shadow.style="display: block;";
+            maxbox.style.cursor="move";
+            bigbox.style.display="block";
+        }
+        maxbox.onmouseout=function (ev) {
+            shadow.style="display: none";
+            maxbox.style.cursor="default";
+            bigbox.style.display="none";
+        }
+        maxbox.onmousemove=function (ev) {
+            var event = event || window.event;
+            var pageX = event.pageX || event.clientX + document.documentElement.scrollLeft;
+            var pageY = event.pageY || event.clientY + document.documentElement.scrollTop;
+            var targetX = pageX - maxbox.offsetLeft;
+            var targetY = pageY - maxbox.offsetTop;
+            var maskX = targetX - shadow.offsetWidth / 2;
+            var maskY = targetY - shadow.offsetHeight / 2;
+            if (maskX < 0) {
+                maskX = 0;
+            }
+            if (maskX > maxbox.offsetWidth - shadow.offsetWidth) {
+                maskX = maxbox.offsetWidth - shadow.offsetWidth;
+            }
+            if (maskY < 0) {
+                maskY = 0;
+            }
+            if (maskY > maxbox.offsetHeight - shadow.offsetHeight) {
+                maskY = maxbox.offsetHeight - shadow.offsetHeight;
+            }
+            shadow.style.left = maskX + "px";
+            shadow.style.top = maskY + "px";
+            var bigToMove = bigimg.offsetWidth - bigbox.offsetWidth;
+            var maskToMove = maxbox.offsetWidth - shadow.offsetWidth;
+            var rate = bigToMove / maskToMove;
+            bigimg.style.left = -rate * maskX + "px";
+            bigimg.style.top = -rate * maskY + "px";
+        }
+</script>
+</body>
+</html>

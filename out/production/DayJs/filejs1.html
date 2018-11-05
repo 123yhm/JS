@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js第一次课</title>
+    <style type="text/css">
+        #box1{ border:2px solid #999; width:350px; height:350px;}
+        #box2 div{border:2px solid #999; width:50px; height:50px; float:left; margin:10px;}
+    </style>
+    <script>
+        var imgArray=["img/s1.jpg","img/s2.jpg","img/s3.jpg"];
+            function test(){
+                var img1Id = document.getElementById("img1");
+                img1Id.mouseover=function(){
+
+                }
+            }
+    </script>
+</head>
+
+<body>
+<div id="box1">
+    <img id="imgMain"  src="img/s1.jpg" width="350px"; height="350px";/>
+</div>
+<div id="box2">
+    <div>
+        <img id="img1" onclick="test(img1)" src="img/s1.jpg" width="50px"; height="50px";/>
+    </div>
+    <div>
+        <img id="img2" onclick="test()" src="img/s2.jpg" width="50px"; height="50px";/>
+    </div>
+    <div>
+        <img id="img3" onclick="test()" src="img/s3.jpg" width="50px"; height="50px";/>
+    </div>
+
+</div>
+</body>
+</html>

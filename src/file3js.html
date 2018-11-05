@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第三次点击轮播图</title>
+    <style type="text/css">
+        *{margin:0px;padding:0px;}
+        body{font-size: 12px;font-family: 微软雅黑;}
+        ul,li{list-style: none;}
+        a{text-decoration: none;}
+        .bigBox{width:350px;height: 350px;margin: 200px auto;border: 1px solid red;overflow: hidden;
+            position:relative; }
+        .imgs{width:1050px; height: 350px;border: 1px solid red;position:absolute;}
+        .imgs div{float: left;}
+        .leftBtn span{
+            text-align: center;
+            width: 50px;
+            height: 80px;
+            float: left;
+            position: relative;
+            margin-top: 100px;
+            opacity:0.2;
+            line-height: 80px;
+            font-size: 30px;
+            cursor: pointer;
+            background: lawngreen;
+        }
+        .rightBtn span{
+            width: 50px;
+            height: 80px;
+            float: right;
+            position: relative;
+            margin-top: 100px;
+            opacity:0.2;
+            line-height: 80px;
+            font-size: 30px;
+            cursor: pointer;
+            text-align: center;
+            background: lawngreen;
+        }
+
+        .leftBtn span:hover{
+            opacity:1;
+            background: red;
+        }
+
+        .rightBtn span:hover{
+            opacity:1;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+
+<DIV class="bigBox">
+
+    <DIV class="imgs" id="imgs">
+        <DIV><img src="img/s1.jpg" width="350" height="350"/></DIV>
+        <DIV><img src="img/s2.jpg" width="350" height="350"/></DIV>
+        <DIV><img src="img/s3.jpg" width="350" height="350"/></DIV>
+    </DIV>
+
+    <DIV class="leftBtn" id="leftBtn" ><span id="left" ><</span>
+    </DIV>
+
+    <DIV class="rightBtn" id="rightBtn"><span id="right" >></span>
+    </DIV>
+</DIV>
+    <script>
+
+            var left=document.getElementById("left");
+            var right=document.getElementById("rightBtn");
+            var img =document.getElementById("imgs");
+            var indexvalue=0;
+
+            left.onclick=function (ev) {
+                indexvalue+=-350;
+                if (indexvalue==-1050){
+                     indexvalue=0;
+                }
+                img.style.marginLeft=indexvalue+"px";
+            };
+            right.onclick = function (ev) {
+                if (indexvalue<0){
+                    indexvalue+=350;
+                }else if(indexvalue>=0){
+                    indexvalue+=-700;
+                }
+                imgs.style.marginLeft = indexvalue + "px";
+            };
+
+    </script>
+</body>
+</html>

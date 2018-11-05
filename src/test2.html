@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>练习</title>
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .box {
+            width: 350px;
+            height: 350px;
+            border: 1px solid red;
+            margin: 100px;
+            position: relative;
+        }
+
+        .mask {
+            width: 175px;
+            height: 175px;
+            background: yellow;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            cursor: move;
+            display: none;
+            opacity: 0.4;
+        }
+
+        .big {
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            top: 0px;
+            left: 360px;
+            border: 1px solid lawngreen;
+            overflow: hidden;
+            display: none;
+        }
+
+        .small {
+            position: relative;
+        }
+
+        .box img {
+            vertical-align: top;
+        }
+
+        #bigBox img {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="box" class="box">
+    <div id="smallBox" class="small">
+        <img src="img/a.png" width="350px" alt=""/>
+
+        <div id="mask" class="mask">
+
+        </div>
+    </div>
+    <div id="bigBox" class="big">
+        <img src="img/a.png" id="bigimg" width="800px" alt=""/>
+    </div>
+
+</div>
+<script>
+    var box = document.getElementById("box");
+    var smallbox = document.getElementById("smallBox");
+    var mask = document.getElementById("mask");
+    var bigbox = document.getElementById("bigBox");
+    var bigimg = document.getElementById("bigimg");
+    smallbox.onmouseover = function (ev) {
+
+        mask.style.display = "block";
+        bigbox.style.display = "block";
+    }
+    smallbox.onmouseout = function (ev) {
+        mask.style.display = "none";
+        bigbox.style.display = "none";
+    }
+    smallbox.onmousemove = function (event) {
+        var event = event || window.event;
+        var pageX = event.pageX || event.clientX + document.documentElement.scrollLeft;
+        var pageY = event.pageY || event.clientY + document.documentElement.scrollTop;
+
+        var targetX = pageX - box.offsetLeft;
+        var targetY = pageY - box.offsetTop;
+        var maskX = targetX - mask.offsetWidth / 2;
+        var maskY = targetY - mask.offsetHeight / 2;
+        if (maskX < 0) {
+            maskX = 0;
+        }
+        if (maskX > smallbox.offsetWidth - mask.offsetWidth) {
+            maskX = smallbox.offsetWidth - mask.offsetWidth;
+        }
+        if (maskY < 0) {
+            maskY = 0;
+        }
+        if (maskY > smallbox.offsetHeight - mask.offsetHeight) {
+            maskY = smallbox.offsetHeight - mask.offsetHeight;
+        }
+        mask.style.left = maskX + "px";
+        mask.style.top = maskY + "px";
+        var bigToMove = bigimg.offsetWidth - bigbox.offsetWidth;
+        var maskToMove = smallbox.offsetWidth - mask.offsetWidth;
+        console.log(bigToMove);
+        console.log("1"+smallbox.offsetWidth);
+        console.log("2"+mask.offsetWidth);
+        console.log("相减后"+maskToMove);
+        var rate = bigToMove / maskToMove;
+        console.log("相处后"+rate);
+        bigimg.style.left = -rate * maskX + "px";
+        bigimg.style.top = -rate * maskY + "px";
+    };
+
+</script>
+
+</body>
+</html>

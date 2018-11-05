@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js第二次课轮播图</title>
+    <style type="text/css">
+        DIV{
+            overflow: hidden;
+            position: relative;
+        }
+      #imgs{
+          width: 1050px;
+          height: 350px;
+          overflow: hidden;
+          float: left;
+          position: absolute;
+      }
+      #imgs div{
+          width: 350px;
+          height: 350px;
+          float: left;
+          position: relative;
+
+      }
+    </style>
+
+</head>
+<body>
+<DIV style="margin: auto; width: 350px; height: 350px;
+margin-top: 100px; border: solid 1px gainsboro">
+
+    <DIV id="imgs">
+
+        <DIV>
+            <IMG src="img/s1.jpg" width="350" height="350" />
+        </DIV>
+
+        <DIV>
+            <IMG src="img/s2.jpg" width="350" height="350" />
+        </DIV>
+
+        <DIV>
+            <IMG src="img/s3.jpg" width="350" height="350" />
+        </DIV>
+
+    </DIV>
+
+
+</DIV>
+
+<script>
+    var img=document.getElementById("imgs");
+    //var numbervalue=-350;index=index+(numbervalue-index)/10制作图片轮播加速度
+    var numbervalue=0;
+    var index=0;
+    function test(){
+        numbervalue+=-350;
+        index=numbervalue;
+        if (index<=-1050){
+            index=0;
+            numbervalue=0;
+        }
+        img.style.marginLeft=index+"px";
+    }
+    setInterval("test()",1000);
+   /* function testleft(){
+        numbervalue+=-350;
+        if (index>=-1050){
+            numbervalue=-350;
+        }
+    }
+    setInterval("testleft()",100);*/
+</script>
+</body>
+</html>

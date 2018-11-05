@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>滚动条</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        body {
+            font-size: 14px;
+            font-family: "微软雅黑";
+            -webkit-user-select: none; /*webkit浏览器*/
+            -moz-user-select: none; /*火狐*/
+            user-select: none;
+            height: 1000px;
+            -ms-user-select: none; /*IE10*/
+            -khtml-user-select: none; /*早期浏览器*/
+            /*css控制页面文字不能被选中user-select:none;*/
+        }
+
+        #box {
+            width: 700px;
+            height: 400px;
+            background: blanchedalmond;
+            /* border: 1px solid red;*/
+            margin: 50px auto;
+            padding: 20px;
+            font-size: 16px;
+            color: #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #box2 {
+            width: 20px;
+            height: 100%;
+            /* border: 1px solid red;*/
+            border-radius: 10px;
+            background: linear-gradient(#84E7F4, #F164F4);
+            position: absolute;top: 0;right: 0;
+
+        }
+
+        #roll {
+            width: 20px;
+            height: 50px;
+            background: black;
+            border-radius: 10px;
+            position: absolute;
+
+            z-index: 2;
+        }
+
+        #rollbar {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            z-index: 1;
+        }
+
+        #box3 {
+            position: relative;
+        }
+
+        #box3 .pbold {
+            font-size: 20px;
+            font-weight: bold;
+            font-family: "Vivaldi"
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+<div id="box2">
+    <div id="roll">
+
+    </div>
+    <div id="rollbar">
+
+    </div>
+</div>
+<div id="box3">
+    <h2>阿甘正传</h2><br/>
+    <p class="pbold">1、Life was like a box of chocolates, you never know what you're going to get.</p>
+    　 <p>生命就像一盒巧克力，结果往往出人意料。</p>
+    　　<p class="pbold">2、Stupid is as stupid does.</p>
+    　　<p>蠢人做蠢事，也可理解为傻人有傻福。</p>
+    　　<p class="pbold">3、Miracles happen every day.</p>
+    　　<p>奇迹每天都在发生。</p>
+    　　<p class="pbold">4、it made me look like a duck in water.</p>
+    　　<p>它让我如鱼得水。</p>
+    　　<p class="pbold">5、I don't know if we each have a destiny, or if we're all just floating around
+    accidental—like on a breeze.</p>
+    　　<p>我不懂我们是否有着各自的命运，还是只是到处随风飘荡。</p>
+    　　<p class="pbold">6、Death is just a part of life, something we're all destined to do.</p>
+    　　<p>死亡是生命的一部分，是我们注定要做的一件事。</p>
+    　　<p class="pbold">7、You have got to put the past behind you before you can move on.</p>
+    　　<p>放下包袱，继续前进。</p>
+    　　<p class="pbold">8、It was like just before the sun goes to bed down on the bayou. There was a million sparkles
+    on the river.</p>
+    　　<p>就像太阳在落山前映射在河口上，有无数的亮点在闪闪发光。</p>
+    　　<p class="pbold">9、If there is anything you need, I will not be far away.</p>
+    　　<p>只要你需要，我就在这里。</p>
+    　　<p class="pbold">10、I am a man of my word.</p>
+    　　<p>我是信守承诺的人。</p>
+    　　<p class="pbold">11、There is one small step for a man,a giant leap for mankind.</p>
+    　　<p>某人的一小步就是人类的一大步。</p>
+</div>
+</div>
+<script type="text/javascript">
+        var box=document.getElementById("box");//外盒
+        var box2=document.getElementById("box2");//滚动条外盒
+        var roll=document.getElementById("roll");//滚动环
+        alert(roll.offsetHeight);
+        var rollbar=document.getElementById("rollbar");//滚动条
+        var box3=document.getElementById("box3");//内容合
+        var ArticleH=box2.offsetHeight - roll.offsetHeight;//滚动条外盒-滚动环
+        var cententHeight=box3.offsetHeight-ArticleH;//内容合-(滚动条外盒+滚动环)的高度算出溢出的高度
+        roll.onmousedown=function (e) {
+            var e=e||window.event;//解决浏览器的兼容问题
+            var ctop=e.pageY-this.offsetTop;//内盒的y轴屏幕的剩余长度
+            document.onmousemove=function (e) {//外围对于整个窗口的移入滑动事件
+                var e=e||window.event;
+                var ntop=e.pageY-ctop;//对于整个窗口的剩余长度
+                ntop=Math.min(ntop,ArticleH);//得到最小值
+                ntop=Math.max(0,ntop)//最大值
+                roll.style.top=ntop+"px";
+                box3.style.top=-(ntop/ArticleH)*cententHeight+"px";
+            };
+            document.onmouseup=function (ev) {//鼠标点击事件
+                this.onmousemove=null;
+                this.onmouseup=null;
+            };
+        };
+        rollbar.onclick=function (e) {//点击滚动条事件
+            var e=e||window.event;
+            var ctop=e.pageY-box.offsetTop-roll.offsetHeight;
+            if(ctop<=0){
+                ctop=0;
+                roll.style.top=ctop+"px";
+                box3.style.top=-cententHeight*(ctop/ArticleH)+"px";
+            }
+        }
+        //滚动事件
+    box.onmousewheel=function (e) {
+        var e=e||window.event;
+        var d=e.wheelDelta;//滚轮--wheelDelta只取±120，其中正数表示为向上，负数表示向下。
+        var nowBar=roll.offsetTop;
+        if(d>0){
+            nowBar-=20;
+        }else{
+            nowBar+=20;
+        };
+        nowBar=Math.min(nowBar,ArticleH);
+        nowBar=Math.max(0,nowBar);
+        roll.style.top=nowBar+"px";
+        box3.style.top=-cententHeight/ArticleH*nowBar+"px";//内容的高度=-盒内内容的当前高度/滚动剩余高度*最大值
+        e.preventDefault();//阻止它的默认行为的发生而发生其他的事情
+    };
+</script>
+</body>
+</html>
